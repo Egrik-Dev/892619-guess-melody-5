@@ -8,7 +8,7 @@ const StartSettings = {
 
 ReactDOM.render(
     <App
-      errorsCount = {StartSettings.ERRORS_CONUNT}
+      errorsCount={StartSettings.ERRORS_CONUNT}
     />,
     document.querySelector(`#root`)
 );

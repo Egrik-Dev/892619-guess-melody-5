@@ -7,7 +7,7 @@ const App = (props) => {
 
   return (
     <WelcomeScreen
-      errorsCount = {errorsCount}
+      errorsCount={errorsCount}
     />
   );
 };
