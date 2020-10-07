@@ -52,7 +52,7 @@ class GameGenreScreen extends PureComponent {
             }}
           >
             {answers.map((answer, i) => (
-              <div key={`${i}-${answer.src}`} className="track">
+              <div key={i} className="track">
                 <button className="track__button track__button--play" type="button"></button>
                 <div className="track__status">
                   <audio src={answer.src}></audio>
