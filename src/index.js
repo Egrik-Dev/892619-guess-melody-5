@@ -1,14 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app";
+import questions from './mocks/questions';
 
-const StartSettings = {
-  ERRORS_CONUNT: 3
-};
+const {StartSettings, ARRAY_MOCKS: gamesQuestions} = questions;
+const {ERRORS_COUNT: errorsCount} = StartSettings;
 
 ReactDOM.render(
     <App
-      errorsCount={StartSettings.ERRORS_CONUNT}
+      errorsCount={errorsCount}
+      questions={gamesQuestions}
     />,
     document.querySelector(`#root`)
 );
