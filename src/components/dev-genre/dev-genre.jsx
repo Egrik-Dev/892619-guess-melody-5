@@ -7,12 +7,12 @@ class GameGenreScreen extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      answers: [false, false, false, false]
+      answers: [false, false, false, false],
     };
   }
 
   render() {
-    const {onAnswer, questions} = this.props;
+    const {onAnswer, questions, renderPlayer} = this.props;
     const {correctGenre: genre, answers} = questions;
     const {answers: userAnswers} = this.state;
 
@@ -28,7 +28,7 @@ class GameGenreScreen extends PureComponent {
             <circle className="timer__line" cx="390" cy="390" r="370"
               style={
                 {
-                  filter: `url(#blur)`,
+                  filter: `url("#blur")`,
                   transform: `rotate(-90deg) scaleY(-1)`,
                   transformOrigin: `center`
                 }
@@ -53,10 +53,7 @@ class GameGenreScreen extends PureComponent {
           >
             {answers.map((answer, i) => (
               <div key={i} className="track">
-                <button className="track__button track__button--play" type="button"></button>
-                <div className="track__status">
-                  <audio src={answer.src}></audio>
-                </div>
+                {renderPlayer(answer.src, i)}
                 <div className="game__answer">
                   <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${i}`} id={`answer-${i}`}
                     onChange={(evt) => {
@@ -82,6 +79,7 @@ class GameGenreScreen extends PureComponent {
 
 GameGenreScreen.propTypes = {
   onAnswer: PropTypes.func.isRequired,
+  renderPlayer: PropTypes.func.isRequired,
   questions: PropTypes.shape({
     answers: PropTypes.arrayOf(PropTypes.shape({
       src: PropTypes.string.isRequired,

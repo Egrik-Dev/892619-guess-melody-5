@@ -4,6 +4,10 @@ import {Redirect} from 'react-router-dom';
 import GameGenreScreen from '../dev-genre/dev-genre';
 import GameArtistScreen from '../dev-artist/dev-artist';
 import {GameType} from '../../const';
+import withActivePlayer from '../../hocks/with-active-player';
+
+const ArtistQuestionScreenWrapped = withActivePlayer(GameArtistScreen);
+const GenreQuestionScreenWrapped = withActivePlayer(GameGenreScreen);
 
 class GameScreen extends PureComponent {
   constructor(props) {
@@ -33,14 +37,14 @@ class GameScreen extends PureComponent {
     switch (currentGame.gameType) {
       case GameType.GENRE:
         return (
-          <GameGenreScreen
+          <GenreQuestionScreenWrapped
             onAnswer={this.onAnswerHandler}
             questions={gameGenre}
           />
         );
       case GameType.ARTIST:
         return (
-          <GameArtistScreen
+          <ArtistQuestionScreenWrapped
             onAnswer={this.onAnswerHandler}
             question={gameArtist}
           />
