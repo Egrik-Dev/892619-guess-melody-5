@@ -30,6 +30,14 @@ class AudioPlayer extends PureComponent {
     this.audio.oncanplaythrough = null;
   }
 
+  componentDidUpdate() {
+    if (this.props.isPlaying) {
+      this.audio.play();
+    } else {
+      this.audio.pause();
+    }
+  }
+
   render() {
     const {isLoading} = this.state;
     const {onPlayButtonClick, isPlaying} = this.props;
@@ -50,14 +58,6 @@ class AudioPlayer extends PureComponent {
         </div>
       </React.Fragment>
     );
-  }
-
-  componentDidUpdate() {
-    if (this.props.isPlaying) {
-      this.audio.play();
-    } else {
-      this.audio.pause();
-    }
   }
 }
 
