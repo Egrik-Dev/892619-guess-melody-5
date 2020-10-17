@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {GenreOnRus} from '../../const';
+import Mistakes from '../mistakes/mistakes';
 
 
 class GameGenreScreen extends PureComponent {
@@ -12,7 +13,7 @@ class GameGenreScreen extends PureComponent {
   }
 
   render() {
-    const {onAnswer, questions, renderPlayer} = this.props;
+    const {onAnswer, questions, renderPlayer, mistakes} = this.props;
     const {correctGenre: genre, answers} = questions;
     const {answers: userAnswers} = this.state;
 
@@ -36,9 +37,7 @@ class GameGenreScreen extends PureComponent {
           </svg>
 
           <div className="game__mistakes">
-            <div className="wrong"></div>
-            <div className="wrong"></div>
-            <div className="wrong"></div>
+            <Mistakes mistakes={mistakes}/>
           </div>
         </header>
 
@@ -78,6 +77,7 @@ class GameGenreScreen extends PureComponent {
 }
 
 GameGenreScreen.propTypes = {
+  mistakes: PropTypes.number.isRequired,
   onAnswer: PropTypes.func.isRequired,
   renderPlayer: PropTypes.func.isRequired,
   questions: PropTypes.shape({

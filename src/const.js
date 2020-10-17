@@ -16,3 +16,5 @@ export const GenreOnRus = new Map([
   [GenreType.HIP_HOP, `хип-хоп`],
   [GenreType.POP, `поп`]
 ]);
+
+export const MAX_MISTAKE_COUNT = 3;
