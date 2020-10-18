@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Mistakes from '../mistakes/mistakes';
 
 const GameArtistScreen = (props) => {
-  const {question, onAnswer, renderPlayer} = props;
+  const {question, mistakes, onAnswer, renderPlayer} = props;
   const {song, answers} = question;
 
   return (
@@ -24,9 +25,9 @@ const GameArtistScreen = (props) => {
         </svg>
 
         <div className="game__mistakes">
-          <div className="wrong"></div>
-          <div className="wrong"></div>
-          <div className="wrong"></div>
+          <Mistakes
+            mistakes={mistakes}
+          />
         </div>
       </header>
 
@@ -44,6 +45,7 @@ const GameArtistScreen = (props) => {
               <input className="artist__input visually-hidden" type="radio" name="answer" value={`answer-${i}`} id={`answer-${i}`}
                 onChange={(evt) => {
                   evt.preventDefault();
+
                   onAnswer(question, answer);
                 }}
               />
@@ -60,6 +62,7 @@ const GameArtistScreen = (props) => {
 };
 
 GameArtistScreen.propTypes = {
+  mistakes: PropTypes.number.isRequired,
   onAnswer: PropTypes.func.isRequired,
   renderPlayer: PropTypes.func.isRequired,
   question: PropTypes.shape({
