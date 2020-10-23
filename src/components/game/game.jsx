@@ -3,22 +3,27 @@ import PropTypes from 'prop-types';
 import {Redirect} from 'react-router-dom';
 import GameGenreScreen from '../dev-genre/dev-genre';
 import GameArtistScreen from '../dev-artist/dev-artist';
-import {GameType} from '../../const';
-import withActivePlayer from '../../hocks/with-active-player';
+import {GameType, MAX_MISTAKE_COUNT} from '../../const';
+import withUserAnswer from '../../hocks/with-user-answer/with-user-answer';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
+import withAudioPlayer from '../../hocks/with-audio-player/with-audio-player';
 
-const ArtistQuestionScreenWrapped = withActivePlayer(GameArtistScreen);
-const GenreQuestionScreenWrapped = withActivePlayer(GameGenreScreen);
+const ArtistQuestionScreenWrapped = withAudioPlayer(GameArtistScreen);
+const GenreQuestionScreenWrapped = withAudioPlayer(withUserAnswer(GameGenreScreen));
 
 const GameScreen = (props) => {
-  const {step, mistakes, questions, resetGame, onUserAnswer} = props;
+  const {step, mistakes, questions, onUserAnswer} = props;
   const [gameGenre, gameArtist] = questions;
   const currentGame = questions[step];
+  const QUANTITY_ARTIST_CHOICE = 1;
+
+  if (mistakes >= MAX_MISTAKE_COUNT) {
+    return <Redirect to="/lose" />;
+  }
 
   if (step >= questions.length || !questions) {
-    resetGame();
-    return <Redirect to="/" />;
+    return <Redirect to="/win-screen" />;
   }
 
   switch (currentGame.gameType) {
@@ -28,6 +33,7 @@ const GameScreen = (props) => {
           onAnswer={onUserAnswer}
           questions={gameGenre}
           mistakes={mistakes}
+          quantityAnswersChoice={gameGenre.answers.length}
         />
       );
     case GameType.ARTIST:
@@ -36,6 +42,7 @@ const GameScreen = (props) => {
           onAnswer={onUserAnswer}
           question={gameArtist}
           mistakes={mistakes}
+          quantityAnswersChoice={QUANTITY_ARTIST_CHOICE}
         />
       );
   }
@@ -63,7 +70,6 @@ GameScreen.propTypes = {
   step: PropTypes.number.isRequired,
   mistakes: PropTypes.number.isRequired,
   questions: PropTypes.array.isRequired,
-  resetGame: PropTypes.func.isRequired,
   onUserAnswer: PropTypes.func.isRequired
 };
 

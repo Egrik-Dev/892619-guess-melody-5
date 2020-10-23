@@ -5,6 +5,7 @@ import LoginScreen from '../login/login';
 import ResultScreen from '../result/result';
 import LoseScreen from '../lose/lose';
 import GameScreen from "../game/game";
+import WinScreen from "../win-screen/win-screen";
 
 const App = () => {
 
@@ -16,7 +17,6 @@ const App = () => {
           path="/"
           render={({history}) => (
             <WelcomeScreen
-              // errorsCount={errorsCount}
               onPlayButtonClick={() => history.push(`/game`)}
             />
           )}
@@ -27,9 +27,24 @@ const App = () => {
         <Route exact path="/result">
           <ResultScreen />
         </Route>
-        <Route exact path="/lose">
-          <LoseScreen />
-        </Route>
+        <Route
+          exact
+          path="/lose"
+          render={({history}) => (
+            <LoseScreen
+              onReplayClickButton={() => history.push(`/game`)}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/win-screen"
+          render={({history}) => (
+            <WinScreen
+              onReplayClickButton={() => history.push(`/game`)}
+            />
+          )}
+        />
         <Route exact path="/game">
           <GameScreen/>
         </Route>

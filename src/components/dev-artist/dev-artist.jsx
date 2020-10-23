@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Mistakes from '../mistakes/mistakes';
+import Player from "../audio-player/audio-player";
+import withAudio from "../../hocks/with-audio/with-audio";
+
+const AudioPlayer = withAudio(Player);
 
 const GameArtistScreen = (props) => {
-  const {question, mistakes, onAnswer, renderPlayer} = props;
+  const {question, mistakes, onAnswer, playingPlayers, onPlayButtonClick} = props;
   const {song, answers} = question;
 
   return (
@@ -35,7 +39,12 @@ const GameArtistScreen = (props) => {
         <h2 className="game__title">Кто исполняет эту песню?</h2>
         <div className="game__track">
           <div className="track">
-            {renderPlayer(song.src, 0)}
+            <AudioPlayer
+              id={0}
+              isPlaying={playingPlayers[0]}
+              src={song.src}
+              onPlayButtonClick={onPlayButtonClick}
+            />
           </div>
         </div>
 
@@ -62,9 +71,10 @@ const GameArtistScreen = (props) => {
 };
 
 GameArtistScreen.propTypes = {
+  playingPlayers: PropTypes.array.isRequired,
   mistakes: PropTypes.number.isRequired,
   onAnswer: PropTypes.func.isRequired,
-  renderPlayer: PropTypes.func.isRequired,
+  onPlayButtonClick: PropTypes.func.isRequired,
   question: PropTypes.shape({
     answers: PropTypes.arrayOf(PropTypes.shape({
       picture: PropTypes.string.isRequired,

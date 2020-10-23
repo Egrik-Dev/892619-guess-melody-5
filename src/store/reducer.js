@@ -1,7 +1,7 @@
 import {extend} from '../utils';
 import {ActionType} from './action';
 import {ARRAY_MOCKS} from '../mocks/questions';
-import {MAX_MISTAKE_COUNT} from '../const';
+// import {MAX_MISTAKE_COUNT} from '../const';
 
 const initialState = {
   mistakes: 0,
@@ -15,9 +15,9 @@ export const reducer = (state = initialState, action) => {
       return extend(state, {step: state.step + action.payload});
 
     case ActionType.INK_MISTAKE:
-      if (state.mistakes >= MAX_MISTAKE_COUNT) {
-        return extend({}, initialState);
-      }
+      // if (state.mistakes >= MAX_MISTAKE_COUNT) {
+      //   return extend({}, initialState);
+      // }
 
       return extend(state, {mistakes: state.mistakes + action.payload});
 
