@@ -13,7 +13,7 @@ const checkAnswerGenreGame = (questions, userAnswer) => {
 };
 
 const checkAnswerArtistGame = (rightAnswer, userAnswer) => {
-  return (rightAnswer.artist === userAnswer.artist);
+  return (rightAnswer.song.artist === userAnswer.artist);
 };
 
 export const ActionCreator = {
