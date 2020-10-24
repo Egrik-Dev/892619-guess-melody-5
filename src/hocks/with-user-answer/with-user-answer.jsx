@@ -26,9 +26,11 @@ const withUserAnswer = (Component) => {
     }
 
     render() {
+      const {answers: userAnswers} = this.state;
+
       return <Component
         {...this.props}
-        // userAnswers={userAnswers}
+        userAnswers={userAnswers}
         onSubmitForm={this.onSubmitForm}
         onChooseMelody={this.onChooseMelody}
       />;

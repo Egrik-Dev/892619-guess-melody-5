@@ -9,8 +9,21 @@ import withAudio from "../../hocks/with-audio/with-audio";
 const AudioPlayer = withAudio(Player);
 
 const GameGenreScreen = (props) => {
-  const {onSubmitForm, onChooseMelody, onPlayButtonClick, playingPlayers, questions, mistakes} = props;
+  const {
+    onSubmitForm,
+    onChooseMelody,
+    onPlayButtonClick,
+    playingPlayers,
+    questions,
+    mistakes,
+    userAnswers
+  } = props;
   const {correctGenre: genre, answers} = questions;
+
+  const onSubmitFormHandler = (evt) => {
+    evt.preventDefault();
+    onSubmitForm();
+  };
 
   return (
     <section className="game game--genre">
@@ -40,10 +53,7 @@ const GameGenreScreen = (props) => {
         <h2 className="game__title">Выберите {GenreOnRus.has(genre) ? GenreOnRus.get(genre) : genre} треки</h2>
         <form
           className="game__tracks"
-          onSubmit={(evt) => {
-            evt.preventDefault();
-            onSubmitForm();
-          }}
+          onSubmit={onSubmitFormHandler}
         >
           {answers.map((answer, i) => (
             <div className="track" key={i}>
@@ -54,9 +64,9 @@ const GameGenreScreen = (props) => {
                 onPlayButtonClick={onPlayButtonClick}
               />
               <ItemMelody
+                userAnswer={userAnswers[i]}
                 onChooseMelody={onChooseMelody}
                 id={i}
-                answer={answer}
               />
             </div>
           )
@@ -69,6 +79,7 @@ const GameGenreScreen = (props) => {
 };
 
 GameGenreScreen.propTypes = {
+  userAnswers: PropTypes.array.isRequired,
   mistakes: PropTypes.number.isRequired,
   onAnswer: PropTypes.func.isRequired,
   onSubmitForm: PropTypes.func.isRequired,

@@ -5,6 +5,12 @@ import {ActionCreator} from '../../store/action';
 
 const LoseScreen = (props) => {
   const {onReplayClickButton, resetGame} = props;
+
+  const onReplayClickHandler = () => {
+    resetGame();
+    onReplayClickButton();
+  };
+
   return (
     <section className="result">
       <div className="result__logo"><img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"/></div>
@@ -13,10 +19,7 @@ const LoseScreen = (props) => {
       <button
         className="replay"
         type="button"
-        onClick={() => {
-          resetGame();
-          onReplayClickButton();
-        }}>
+        onClick={onReplayClickHandler}>
           Попробовать ещё раз
       </button>
     </section>

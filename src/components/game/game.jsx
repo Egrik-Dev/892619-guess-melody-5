@@ -33,7 +33,7 @@ const GameScreen = (props) => {
           onAnswer={onUserAnswer}
           questions={gameGenre}
           mistakes={mistakes}
-          quantityAnswersChoice={gameGenre.answers.length}
+          quantityAnswersChoice={gameGenre.answers && gameGenre.answers.length}
         />
       );
     case GameType.ARTIST:

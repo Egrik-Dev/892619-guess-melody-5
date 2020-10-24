@@ -7,6 +7,11 @@ const WinScreen = (props) => {
   const {onReplayClickButton, resetGame, step, mistakes} = props;
   const correctlyQuestionAnswers = step - mistakes;
 
+  const onReplayClickHandler = () => {
+    resetGame();
+    onReplayClickButton();
+  };
+
   return (
     <section className="result">
       <div className="result__logo"><img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83" /></div>
@@ -15,10 +20,7 @@ const WinScreen = (props) => {
       <button
         className="replay"
         type="button"
-        onClick={() => {
-          resetGame();
-          onReplayClickButton();
-        }}
+        onClick={onReplayClickHandler}
       >Сыграть ещё раз
       </button>
     </section>
