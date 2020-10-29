@@ -49,8 +49,8 @@ const withAudioPlayer = (Component) => {
         src: PropTypes.string.isRequired,
         genre: PropTypes.string.isRequired
       })).isRequired,
-      correctGenre: PropTypes.string.isRequired,
-      gameType: PropTypes.string.isRequired
+      genre: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired
     })
   };
 

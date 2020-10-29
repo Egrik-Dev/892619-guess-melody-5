@@ -17,4 +17,4 @@ export const GenreOnRus = new Map([
   [GenreType.POP, `поп`]
 ]);
 
-export const MAX_MISTAKE_COUNT = 3;
+export const MAX_MISTAKE_COUNT = 20;
