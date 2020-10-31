@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
+import {ActionCreator} from '../../actions/action';
 
 const WinScreen = (props) => {
   const {onReplayClickButton, resetGame, step, mistakes} = props;
@@ -27,9 +27,9 @@ const WinScreen = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  step: state.step,
-  mistakes: state.mistakes,
+const mapStateToProps = ({GAME}) => ({
+  step: GAME.step,
+  mistakes: GAME.mistakes,
 });
 
 const mapDispatchToProps = (dispatch) => ({

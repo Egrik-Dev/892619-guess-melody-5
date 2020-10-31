@@ -8,7 +8,6 @@ import GameScreen from "../game/game";
 import WinScreen from "../win-screen/win-screen";
 
 const App = () => {
-
   return (
     <BrowserRouter>
       <Switch>

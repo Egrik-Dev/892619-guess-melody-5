@@ -18,7 +18,7 @@ const GameGenreScreen = (props) => {
     mistakes,
     userAnswers
   } = props;
-  const {correctGenre: genre, answers} = questions;
+  const {genre, answers} = questions;
 
   const onSubmitFormHandler = (evt) => {
     evt.preventDefault();
@@ -91,8 +91,8 @@ GameGenreScreen.propTypes = {
       src: PropTypes.string.isRequired,
       genre: PropTypes.string.isRequired
     })).isRequired,
-    correctGenre: PropTypes.string.isRequired,
-    gameType: PropTypes.string.isRequired
+    genre: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired
   }).isRequired
 };
 

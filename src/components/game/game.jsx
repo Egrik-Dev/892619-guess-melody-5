@@ -6,7 +6,7 @@ import GameArtistScreen from '../dev-artist/dev-artist';
 import {GameType, MAX_MISTAKE_COUNT} from '../../const';
 import withUserAnswer from '../../hocks/with-user-answer/with-user-answer';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
+import {ActionCreator} from '../../actions/action';
 import withAudioPlayer from '../../hocks/with-audio-player/with-audio-player';
 
 const ArtistQuestionScreenWrapped = withAudioPlayer(GameArtistScreen);
@@ -14,7 +14,6 @@ const GenreQuestionScreenWrapped = withAudioPlayer(withUserAnswer(GameGenreScree
 
 const GameScreen = (props) => {
   const {step, mistakes, questions, onUserAnswer} = props;
-  const [gameGenre, gameArtist] = questions;
   const currentGame = questions[step];
   const QUANTITY_ARTIST_CHOICE = 1;
 
@@ -26,21 +25,23 @@ const GameScreen = (props) => {
     return <Redirect to="/win-screen" />;
   }
 
-  switch (currentGame.gameType) {
+  switch (currentGame.type) {
     case GameType.GENRE:
       return (
         <GenreQuestionScreenWrapped
+          key={step}
           onAnswer={onUserAnswer}
-          questions={gameGenre}
+          questions={currentGame}
           mistakes={mistakes}
-          quantityAnswersChoice={gameGenre.answers && gameGenre.answers.length}
+          quantityAnswersChoice={currentGame.answers && currentGame.answers.length}
         />
       );
     case GameType.ARTIST:
       return (
         <ArtistQuestionScreenWrapped
+          key={step}
           onAnswer={onUserAnswer}
-          question={gameArtist}
+          question={currentGame}
           mistakes={mistakes}
           quantityAnswersChoice={QUANTITY_ARTIST_CHOICE}
         />
@@ -50,10 +51,10 @@ const GameScreen = (props) => {
   return <Redirect to="/" />;
 };
 
-const mapStateToProps = (state) => ({
-  step: state.step,
-  mistakes: state.mistakes,
-  questions: state.questions
+const mapStateToProps = ({GAME, DATA}) => ({
+  step: GAME.step,
+  mistakes: GAME.mistakes,
+  questions: DATA.questions
 });
 
 const mapDispatchToProps = (dispatch) => ({

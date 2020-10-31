@@ -3,12 +3,13 @@ import {GameType} from '../const';
 export const ActionType = {
   INC_STEP: `INC_STEP`,
   INK_MISTAKE: `INK_MISTAKE`,
-  RESET_GAME: `RESET_GAME`
+  RESET_GAME: `RESET_GAME`,
+  LOAD_QUESTIONS: `LOAD_QUESTIONS`
 };
 
 const checkAnswerGenreGame = (questions, userAnswer) => {
   return userAnswer.every((it, i) => {
-    return it === (questions.answers[i].genre === questions.correctGenre);
+    return it === (questions.answers[i].genre === questions.genre);
   });
 };
 
@@ -29,7 +30,7 @@ export const ActionCreator = {
   makeMistake: (question, answer) => {
     let answerIsCorrect = false;
 
-    switch (question.gameType) {
+    switch (question.type) {
       case GameType.ARTIST:
         answerIsCorrect = checkAnswerArtistGame(question, answer);
         break;
@@ -43,5 +44,10 @@ export const ActionCreator = {
       type: ActionType.INK_MISTAKE,
       payload: answerIsCorrect ? 0 : 1
     };
-  }
+  },
+
+  loadQuestions: (questions) => ({
+    type: ActionType.LOAD_QUESTIONS,
+    payload: questions
+  })
 };
