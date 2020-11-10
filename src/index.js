@@ -6,19 +6,22 @@ import {Provider} from 'react-redux';
 import rootReducer from './reducers/root-reducers';
 import thunk from 'redux-thunk';
 import {createApi} from './services/api';
-import {fetchQuestions} from './store/action-api';
+import {ActionCreator} from './actions/action';
 import {composeWithDevTools} from "redux-devtools-extension";
+import {AuthorizationStatus} from './const';
+import {redirect} from './middlewares/redirect';
 
-const api = createApi();
+const api = createApi(
+    () => store.dispatch(ActionCreator.changeAuthorizationStatus(AuthorizationStatus.NO_AUTH))
+);
 
 const store = createStore(
     rootReducer,
     composeWithDevTools(
-        applyMiddleware(thunk.withExtraArgument(api))
+        applyMiddleware(thunk.withExtraArgument(api)),
+        applyMiddleware(redirect)
     )
 );
-
-store.dispatch(fetchQuestions());
 
 ReactDOM.render(
     <Provider store={store}>

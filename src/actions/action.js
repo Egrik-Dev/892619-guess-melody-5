@@ -4,7 +4,10 @@ export const ActionType = {
   INC_STEP: `INC_STEP`,
   INK_MISTAKE: `INK_MISTAKE`,
   RESET_GAME: `RESET_GAME`,
-  LOAD_QUESTIONS: `LOAD_QUESTIONS`
+  LOAD_QUESTIONS: `LOAD_QUESTIONS`,
+  CHANGE_USER_STATUS: `CHANGE_USER_STATUS`,
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
+  LOAD_DONE: `LOAD_DONE`
 };
 
 const checkAnswerGenreGame = (questions, userAnswer) => {
@@ -49,5 +52,20 @@ export const ActionCreator = {
   loadQuestions: (questions) => ({
     type: ActionType.LOAD_QUESTIONS,
     payload: questions
+  }),
+
+  changeAuthorizationStatus: (status) => ({
+    type: ActionType.CHANGE_USER_STATUS,
+    payload: status
+  }),
+
+  redirectToRoute: (route) => ({
+    type: ActionType.REDIRECT_TO_ROUTE,
+    payload: route
+  }),
+
+  loadDone: (status) => ({
+    type: ActionType.LOAD_DONE,
+    payload: status
   })
 };
