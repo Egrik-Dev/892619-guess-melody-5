@@ -4,6 +4,7 @@ import {ActionType} from '../../actions/action';
 const initialState = {
   mistakes: 0,
   step: 0,
+  isLoading: true
 };
 
 const gameProcess = (state = initialState, action) => {
@@ -16,6 +17,9 @@ const gameProcess = (state = initialState, action) => {
 
     case ActionType.RESET_GAME:
       return extend(state, {mistakes: 0, step: 0});
+
+    case ActionType.LOAD_DONE:
+      return extend(state, {isLoading: false});
 
     default:
       break;
