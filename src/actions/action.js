@@ -64,8 +64,7 @@ export const ActionCreator = {
     payload: route
   }),
 
-  loadDone: (status) => ({
-    type: ActionType.LOAD_DONE,
-    payload: status
+  loadDone: () => ({
+    type: ActionType.LOAD_DONE
   })
 };

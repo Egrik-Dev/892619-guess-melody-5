@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should Mistakes render correctly 1`] = `
+Array [
+  <div
+    className="wrong"
+  />,
+  <div
+    className="wrong"
+  />,
+  <div
+    className="wrong"
+  />,
+]
+`;

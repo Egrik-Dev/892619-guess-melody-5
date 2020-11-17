@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Mistakes = (props) => {
   const {mistakes} = props;
@@ -9,6 +10,10 @@ const Mistakes = (props) => {
       <div key={i} className="wrong"></div>
     ))
   );
+};
+
+Mistakes.propTypes = {
+  mistakes: PropTypes.number.isRequired,
 };
 
 export default Mistakes;
